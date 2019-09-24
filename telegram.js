@@ -5,7 +5,7 @@ class Telegram {
     this.api = axios.create({
       baseURL: `https://api.telegram.org/bot${telegramToken}/`,
       headers: {
-        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/json'
       }
     })
 
