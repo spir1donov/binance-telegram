@@ -62,7 +62,7 @@ class Binance {
   async getListenKey () {
     return new Promise((resolve, reject) => {
       this.api.post('/api/v1/userDataStream', {
-        timestamp: new Date() / 1000
+        // timestamp: new Date() / 1000
       })
       .then(response => resolve(response.data.listenKey))
       .catch(reason => reject(reason))
