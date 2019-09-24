@@ -29,7 +29,7 @@ class Binance {
       this.ws.on('close', handleWebSocketDisconnect)
       this.ws.on('message', handleWebSocketMessage)
     } catch (e) {
-      console.error('initWebSocket', e)
+      console.log('Binance: initWebSocket', e)
     }
   }
 
@@ -42,7 +42,7 @@ class Binance {
       listenKey: this.listenKey
     })
     .then(() => console.log('WebSocket keep-alive sent'))
-    .catch(() => console.error('WebSocket keep-alive failed', e))
+    .catch(() => console.log('WebSocket keep-alive failed', e))
   }
 
   handleWebSocketDisconnect () {
@@ -61,9 +61,7 @@ class Binance {
 
   async getListenKey () {
     return new Promise((resolve, reject) => {
-      this.api.post('/api/v1/userDataStream', {
-        // timestamp: new Date() / 1000
-      })
+      this.api.post('/api/v1/userDataStream')
       .then(response => resolve(response.data.listenKey))
       .catch(reason => reject(reason))
     })
