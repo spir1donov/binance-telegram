@@ -15,6 +15,8 @@ class Binance {
     this.messageHandler = null
     this.timer = null
     this.ws = null
+
+    this.initWebSocket()
   }
 
   async initWebSocket() {
