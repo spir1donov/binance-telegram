@@ -52,7 +52,7 @@ app.get('/test', async (req, res) => {
     const response = await telegram.sendMessage(config.telegramUser,
       req.query.test
     )
-    text = `Message sent. API Response: ${response}`
+    text = `Message sent. API Response: ${JSON.stringify(response, null, 2)}`
   } catch (e) {
     text = `Error occured: ${JSON.stringify(e, null, 2)}`
   }
