@@ -47,6 +47,18 @@ app.post('/', async (req, res) => {
   res.send(text)
 })
 
+app.get('/test', async (req, res) => {
+  try {
+    const response = await telegram.sendMessage(config.telegramUser,
+      req.query.test
+    )
+    text = `Message sent. API Response: ${response}`
+  } catch (e) {
+    text = `Error occured: ${JSON.stringify(e, null, 2)}`
+  }
+  res.send(text)
+})
+
 binance.setMessageHandler(handleBinanceMessage)
 
 app.listen(port, () => console.log(`Bot listening on port ${port}!`))
