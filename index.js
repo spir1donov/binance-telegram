@@ -18,6 +18,7 @@ function handleBinanceMessage (message) {
     Price: ${message.p}, Quantity: ${message.q}
     Current order status: ${message.X}`
 
+    console.log('Sending order update', text)
     try {
       telegram.sendMessage(config.telegramUser, text)
     } catch (e) {
@@ -44,6 +45,7 @@ app.post('/', async (req, res) => {
   } catch (e) {
     text = `Error occured: ${JSON.stringify(e, null, 2)}`
   }
+  console.log('POST /test result', text)
   res.send(text)
 })
 
@@ -56,6 +58,7 @@ app.get('/test', async (req, res) => {
   } catch (e) {
     text = `Error occured: ${JSON.stringify(e, null, 2)}`
   }
+  console.log('GET /test result', text)
   res.send(text)
 })
 
