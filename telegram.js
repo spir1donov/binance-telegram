@@ -16,7 +16,7 @@ class Telegram {
     return new Promise((resolve, reject) => {
       this.api.post('sendMessage', {
         text: text,
-        chatId: to
+        chat_id: to
       })
       .then(response => resolve(response.data))
       .catch(reason => reject(reason))
