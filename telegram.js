@@ -32,4 +32,4 @@ class Telegram {
   }
 }
 
-export default Telegram
+module.exports = Telegram
