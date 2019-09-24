@@ -36,19 +36,6 @@ app.get('/', (req, res) => res.send(
   'This is a Telegram bot notification system for Binance. Request unknown.'
 ))
 
-app.post('/', async (req, res) => {
-  try {
-    const response = await telegram.sendMessage(config.telegramUser,
-      `No service set\n\nbody:\n${JSON.stringify(req.body, null, 2)}\nquery:\n${JSON.stringify(req.query, null, 2)}`
-    )
-    text = `Message sent. API Response: ${response}`
-  } catch (e) {
-    text = `Error occured: ${JSON.stringify(e, null, 2)}`
-  }
-  console.log('POST /test result', text)
-  res.send(text)
-})
-
 app.get('/test', async (req, res) => {
   try {
     const response = await telegram.sendMessage(config.telegramUser,

@@ -3,10 +3,7 @@ const axios = require('axios')
 class Telegram {
   constructor (telegramToken, botUrl) {
     this.api = axios.create({
-      baseURL: `https://api.telegram.org/bot${telegramToken}/`,
-      headers: {
-        // 'Content-Type': 'application/json'
-      }
+      baseURL: `https://api.telegram.org/bot${telegramToken}/`
     })
 
     this.setWebhook(botUrl)
