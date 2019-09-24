@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 class Telegram {
-  async constructor (telegramToken, botUrl) {
+  constructor (telegramToken, botUrl) {
     this.api = axios.create({
       baseURL: `https://api.telegram.org/bot${telegramToken}/`,
       headers: {
@@ -9,7 +9,7 @@ class Telegram {
       }
     })
 
-    await this.setWebhook(botUrl)
+    this.setWebhook(botUrl)
   }
 
   sendMessage(to, text) {
