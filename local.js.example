@@ -1,0 +1,6 @@
+module.exports = {
+  telegramToken: '882519695:AAGWbw...UMkGw', // needs to be replaced with a token from @BotFather
+  telegramUser: '276821848', // Telegram user ID, like 87654321
+  binanceKey: 'd4ZqVm5.....D4RdxmdKkjIX',
+  botUrl: 'https://api.ateekeen.com/binance-telegram/' // I've been reverse-proxying it with nginx
+}
