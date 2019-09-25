@@ -13,6 +13,8 @@ function handleBinanceMessage(msg) {
   const event = message.e
   let text
 
+  console.log('Handling Binance message', message)
+
   if (event === 'executionReport' || event === 'ListStatus') {
     text = `Order ID: ${message.i} for ${message.s}
     Side: ${message.S}, Type: ${message.o}
