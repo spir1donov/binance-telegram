@@ -69,15 +69,11 @@ class Binance {
     console.log('Binance: WebSocket Message received', msg, message)
 
     if (message.e === 'executionReport' || message.e === 'ListStatus') {
-      try {
-        const result = this.sendMessage(this.recipient, `Order ID: ${message.i} for ${message.s}
-        Side: ${message.S}, Type: ${message.o}
-        Price: ${message.p}, Quantity: ${message.q}
-        Current order status: ${message.X}`)
-        console.log('Sending order update', text, ', Result:', result)
-      } catch (e) {
-        console.error('Error occured', e)
-      }
+      const result = this.sendMessage(this.recipient, `Order ID: ${message.i} for ${message.s}
+      Side: ${message.S}, Type: ${message.o}
+      Price: ${message.p}, Quantity: ${message.q}
+      Current order status: ${message.X}`)
+      console.log('Sending order update', text, ', Result:', result)
     }
   }
 
