@@ -69,11 +69,12 @@ class Binance {
     console.log('Binance: WebSocket Message received', msg, message)
 
     if (message.e === 'executionReport' || message.e === 'ListStatus') {
-      const result = this.sendMessage(this.recipient, `Order ID: ${message.i} for ${message.s}
+      const text = `Order ID: ${message.i} for ${message.s}
       Side: ${message.S}, Type: ${message.o}
       Price: ${message.p}, Quantity: ${message.q}
-      Current order status: ${message.X}`)
-      console.log('Sending order update', text, ', Result:', result)
+      Current order status: ${message.X}`
+      console.log(`Sending order update to ${this.recipient}: `, text, ', Result:', result)
+      const result = this.sendMessage(this.recipient, text)
     }
   }
 
