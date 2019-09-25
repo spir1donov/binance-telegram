@@ -74,8 +74,10 @@ class Binance {
       Price: ${message.p}, Quantity: ${message.q}
       Current order status: ${message.X}`
       console.log(`Sending order update to ${this.recipient}: `, text)
-      const result = this.sendMessage(this.recipient, text)
-      console.log('Result:', result)
+      this.tg.post('sendMessage', {
+        text: text,
+        chat_id: this.recipient
+      })
     }
   }
 
