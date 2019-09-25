@@ -1,20 +1,21 @@
 const axios = require('axios')
 const WebSocket = require('ws')
+const Telegram = require('./telegram.js')
 
 class Binance {
-  constructor(binanceKey, telegramRecipient, telegramBot) {
+  // constructor(binanceKey, telegramRecipient, telegramBot) {
+  constructor(config) {
     this.api = axios.create({
       baseURL: `https://api.binance.com/`,
       headers: {
         'Content-Type': 'application/json',
-        'X-MBX-APIKEY': binanceKey
+        'X-MBX-APIKEY': config.binanceKey
       }
     })
 
     this.listenKey = null
-    this.telegram = telegramBot
+    this.telegram = new Telegram(config.telegramToken, config.botUrl)
     this.timer = null
-    this.recipient = telegramRecipient
     this.ws = null
 
     this.initWebSocket()
@@ -63,7 +64,7 @@ class Binance {
 
     if (message.e === 'executionReport' || message.e === 'ListStatus') {
       try {
-        const result = this.telegram.sendMessage(this.recipient, `Order ID: ${message.i} for ${message.s}
+        const result = this.telegram.sendMessage(config.telegramUser, `Order ID: ${message.i} for ${message.s}
         Side: ${message.S}, Type: ${message.o}
         Price: ${message.p}, Quantity: ${message.q}
         Current order status: ${message.X}`)
