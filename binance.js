@@ -39,7 +39,7 @@ class Binance {
     this.timer = setInterval(() => {
       console.log('Binance: sending keep-alive')
       this.sendKeepAlive().bind(this)
-    }, 30 * 60 * 1000) // every 30 minutes
+    }, 30 * 1000) // every 30 seconds
   }
 
   sendKeepAlive () {
