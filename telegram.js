@@ -10,17 +10,20 @@ class Telegram {
   }
 
   sendMessage(to, text) {
+    const message = {
+      text: text,
+      chat_id: to
+    }
+    console.log('Telegram: sending message ', message)
     return new Promise((resolve, reject) => {
-      this.api.post('sendMessage', {
-        text: text,
-        chat_id: to
-      })
+      this.api.post('sendMessage', message)
       .then(response => resolve(response.data))
       .catch(reason => reject(reason))
     })
   }
 
   async setWebhook(botUrl) {
+    console.log('Telegram: setting Webhook to ', botUrl)
     this.api.post('setWebhook', {
       url: botUrl
     })
