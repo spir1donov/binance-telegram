@@ -18,6 +18,7 @@ class Binance {
     })
 
     this.listenKey = null
+    this.recipient = config.telegramUser
     this.telegram = new Telegram(config.telegramToken, config.botUrl)
     this.timer = null
     this.ws = null
@@ -69,7 +70,7 @@ class Binance {
 
     if (message.e === 'executionReport' || message.e === 'ListStatus') {
       try {
-        const result = this.sendMessage(config.telegramUser, `Order ID: ${message.i} for ${message.s}
+        const result = this.sendMessage(this.recipient, `Order ID: ${message.i} for ${message.s}
         Side: ${message.S}, Type: ${message.o}
         Price: ${message.p}, Quantity: ${message.q}
         Current order status: ${message.X}`)
