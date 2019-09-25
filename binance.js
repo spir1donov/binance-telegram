@@ -73,8 +73,9 @@ class Binance {
       Side: ${message.S}, Type: ${message.o}
       Price: ${message.p}, Quantity: ${message.q}
       Current order status: ${message.X}`
-      console.log(`Sending order update to ${this.recipient}: `, text, ', Result:', result)
+      console.log(`Sending order update to ${this.recipient}: `, text)
       const result = this.sendMessage(this.recipient, text)
+      console.log('Result:', result)
     }
   }
 
