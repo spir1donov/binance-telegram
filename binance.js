@@ -24,7 +24,7 @@ class Binance {
       this.listenKey = await this.getListenKey()
       console.log('Binance: listenKey', this.listenKey)
       this.ws = new WebSocket(`wss://stream.binance.com:9443/ws/${this.listenKey}`)
-      console.log('Binance: WebSocket', this.ws)
+      console.log('Binance: WebSocket', this.ws.url)
       this.keepWebSocketAlive()
       this.ws.on('close', this.handleWebSocketDisconnect)
       this.ws.on('message', this.handleWebSocketMessage)
