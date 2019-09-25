@@ -55,9 +55,7 @@ class Binance {
     console.log('WebSocket disconnected')
     this.ws = null
     clearInterval(this.timer)
-    this.setTimeout(() => {
-      this.initWebSocket()
-    }, 1000)
+    this.initWebSocket()
   }
 
   handleWebSocketMessage (message) {
