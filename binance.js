@@ -13,6 +13,7 @@ class Binance {
     })
 
     this.listenKey = null
+    this.keepAliveInterval = 30 * 60 * 1000 // every 30 minutes
     this.messageHandler = null
     this.timer = null
     this.ws = null
@@ -36,13 +37,14 @@ class Binance {
   }
 
   keepWebSocketAlive () {
+    console.log('Binance: setting keep-alive interval to ', this.keepAliveInterval)
     this.timer = setInterval(() => {
-      console.log('Binance: sending keep-alive')
       this.sendKeepAlive()
-    }, 30 * 60 * 1000) // every 30 minutes
+    }, this.keepAliveInterval)
   }
 
   sendKeepAlive () {
+    console.log('Binance: sending keep-alive')
     this.api.put('/api/v1/userDataStream', querystring.stringify({
       listenKey: this.listenKey
     }))
