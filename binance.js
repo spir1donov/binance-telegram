@@ -52,7 +52,7 @@ class Binance {
       listenKey: this.listenKey
     })
     .then(() => console.log('WebSocket keep-alive sent'))
-    .catch(() => console.log('WebSocket keep-alive failed', e))
+    .catch((e) => console.log('WebSocket keep-alive failed', e))
   }
 
   handleWebSocketDisconnect () {
