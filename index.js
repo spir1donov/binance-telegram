@@ -8,7 +8,8 @@ const config = require('./local.js')
 const telegram = new Telegram(config.telegramToken, config.botUrl)
 const binance = new Binance(config.binanceKey)
 
-function handleBinanceMessage (message) {
+function handleBinanceMessage(msg) {
+  const message = JSON.parse(msg)
   const event = message.e
   let text
 
