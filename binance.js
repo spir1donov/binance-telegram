@@ -35,7 +35,7 @@ class Binance {
       console.log('Binance: WebSocket', this.ws.url)
       this.keepWebSocketAlive()
       this.ws.on('close', this.handleWebSocketDisconnect)
-      this.ws.on('message', this.handleWebSocketMessage)
+      this.ws.on('message', this.handleWebSocketMessage.bind(this))
     } catch (e) {
       console.log('Binance: initWebSocket', e)
     }
