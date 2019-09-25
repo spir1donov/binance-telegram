@@ -1,12 +1,13 @@
 const axios = require('axios')
 const WebSocket = require('ws')
+const querystring = require('querystring')
 
 class Binance {
   constructor(binanceKey) {
     this.api = axios.create({
       baseURL: `https://api.binance.com/`,
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
         'X-MBX-APIKEY': binanceKey
       }
     })
@@ -40,9 +41,9 @@ class Binance {
   }
 
   sendKeepAlive () {
-    this.api.put('/api/v1/userDataStream', {
+    this.api.put('/api/v1/userDataStream', querystring.stringify({
       listenKey: this.listenKey
-    })
+    }))
     .then(() => console.log('WebSocket keep-alive sent'))
     .catch(() => console.log('WebSocket keep-alive failed', e))
   }
