@@ -30,6 +30,4 @@ app.get('/test', async (req, res) => {
   res.send(text)
 })
 
-binance.setMessageHandler(handleBinanceMessage)
-
 app.listen(port, () => console.log(`Bot listening on port ${port}!`))
