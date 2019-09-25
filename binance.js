@@ -57,8 +57,9 @@ class Binance {
     }, 1000)
   }
 
-  handleWebSocketMessage (message) {
-    console.log('Binance: WebSocket Message received', message)
+  handleWebSocketMessage (msg) {
+    const message = JSON.parse(msg)
+    console.log('Binance: WebSocket Message received', msg, message)
 
     if (message.e === 'executionReport' || message.e === 'ListStatus') {
       try {
