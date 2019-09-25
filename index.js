@@ -6,7 +6,7 @@ const port = 4321
 const config = require('./local.js')
 
 const telegram = new Telegram(config.telegramToken, config.botUrl)
-const binance = new Binance(config.binanceKey)
+const binance = new Binance(config.binanceKey, telegram)
 
 function handleBinanceMessage (message) {
   const event = message.e
