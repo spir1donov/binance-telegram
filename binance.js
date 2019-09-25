@@ -2,7 +2,7 @@ const axios = require('axios')
 const WebSocket = require('ws')
 
 class Binance {
-  constructor(binanceKey, telegramBot) {
+  constructor(binanceKey, telegramRecipient, telegramBot) {
     this.api = axios.create({
       baseURL: `https://api.binance.com/`,
       headers: {
@@ -12,9 +12,9 @@ class Binance {
     })
 
     this.listenKey = null
-    this.messageHandler = null
     this.telegram = telegramBot
     this.timer = null
+    this.recipient = telegramRecipient
     this.ws = null
 
     this.initWebSocket()
@@ -59,7 +59,18 @@ class Binance {
 
   handleWebSocketMessage (message) {
     console.log('Binance: WebSocket Message received', message)
-    this.messageHandler(message)
+
+    if (message.e === 'executionReport' || message.e === 'ListStatus') {
+      try {
+        const result = this.telegram.sendMessage(this.recipient, `Order ID: ${message.i} for ${message.s}
+        Side: ${message.S}, Type: ${message.o}
+        Price: ${message.p}, Quantity: ${message.q}
+        Current order status: ${message.X}`)
+        console.log('Sending order update', text, ', Result:', result)
+      } catch (e) {
+        console.error('Error occured', e)
+      }
+    }
   }
 
   async getListenKey () {
@@ -68,14 +79,6 @@ class Binance {
       .then(response => resolve(response.data.listenKey))
       .catch(reason => reject(reason))
     })
-  }
-
-  setMessageHandler (handler) {
-    this.messageHandler = handler
-  }
-
-  deleteMessageHandler () {
-    this.messageHandler = null
   }
 }
 

@@ -6,26 +6,7 @@ const port = 4321
 const config = require('./local.js')
 
 const telegram = new Telegram(config.telegramToken, config.botUrl)
-const binance = new Binance(config.binanceKey, telegram)
-
-function handleBinanceMessage (message) {
-  const event = message.e
-  let text
-
-  if (event === 'executionReport' || event === 'ListStatus') {
-    text = `Order ID: ${message.i} for ${message.s}
-    Side: ${message.S}, Type: ${message.o}
-    Price: ${message.p}, Quantity: ${message.q}
-    Current order status: ${message.X}`
-
-    console.log('Sending order update', text)
-    try {
-      telegram.sendMessage(config.telegramUser, text)
-    } catch (e) {
-      console.error('Error occured', e)
-    }
-  }
-}
+const binance = new Binance(config.binanceKey, config.telegramUser, telegram)
 
 app.use(express.json({
   type: '*/json',
