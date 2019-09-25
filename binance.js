@@ -2,7 +2,7 @@ const axios = require('axios')
 const WebSocket = require('ws')
 
 class Binance {
-  constructor(binanceKey) {
+  constructor(binanceKey, telegramBot) {
     this.api = axios.create({
       baseURL: `https://api.binance.com/`,
       headers: {
@@ -13,6 +13,7 @@ class Binance {
 
     this.listenKey = null
     this.messageHandler = null
+    this.telegram = telegramBot
     this.timer = null
     this.ws = null
 
