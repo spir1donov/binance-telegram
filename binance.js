@@ -24,7 +24,7 @@ class Binance {
     this.ws = null
 
     this.initWebSocket()
-    this.setWebhook(botUrl)
+    this.setWebhook(config.botUrl)
   }
 
   async initWebSocket() {
