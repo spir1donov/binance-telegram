@@ -38,7 +38,7 @@ class Binance {
   keepWebSocketAlive () {
     this.timer = setInterval(() => {
       console.log('Binance: sending keep-alive')
-      this.sendKeepAlive().bind(this)
+      this.sendKeepAlive()
     }, 30 * 1000) // every 30 seconds
   }
 
