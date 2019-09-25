@@ -34,7 +34,9 @@ class Binance {
   }
 
   keepWebSocketAlive () {
-    this.timer = setInterval(this.sendKeepAlive, 30 * 60 * 1000) // every 30 minutes
+    this.timer = setInterval(() => {
+      this.sendKeepAlive()
+    }, 30 * 60 * 1000) // every 30 minutes
   }
 
   sendKeepAlive () {
