@@ -5,6 +5,12 @@ const app = express()
 const port = 4321
 const config = require('./local.js')
 
+console.log(`
+****************************
+***** STARTING THE BOT *****
+****************************
+`)
+
 const telegram = new Telegram(config.telegramToken, config.botUrl)
 const binance = new Binance(config.binanceKey)
 
