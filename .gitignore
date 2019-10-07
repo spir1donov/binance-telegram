@@ -3,3 +3,4 @@ node_modules/
 .vscode
 **/local.js
 *.bz2
+opt
