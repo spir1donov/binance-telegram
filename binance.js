@@ -59,15 +59,33 @@ class Binance {
     this.initWebSocket()
   }
 
-  handleWebSocketMessage (message) {
+  async handleWebSocketMessage (message) {
     console.log('Binance: WebSocket Message received', message)
-    this.messageHandler(message)
+    let json = JSON.parse(message)
+    const price = parseFloat(json.p)
+    if (price === 0) {
+      const currentPrice = await this.getSymbolPriceTicker(json.s)
+      json.p = currentPrice
+      this.messageHandler(json)
+    } else {
+      this.messageHandler(json)
+    }
   }
 
   async getListenKey () {
     return new Promise((resolve, reject) => {
       this.api.post('/api/v1/userDataStream')
       .then(response => resolve(response.data.listenKey))
+      .catch(reason => reject(reason))
+    })
+  }
+
+  async getSymbolPriceTicker (symbol) {
+    return new Promise((resolve, reject) => {
+      this.api.post('/api/v3/ticker/price', querystring.stringify({
+        symbol: symbol
+      }))
+      .then(response => resolve(response.data.price))
       .catch(reason => reject(reason))
     })
   }
