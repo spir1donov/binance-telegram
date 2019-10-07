@@ -64,6 +64,7 @@ class Binance {
     let json = JSON.parse(message)
     const price = parseFloat(json.p)
     if (price === 0) {
+      console.log(`Symbol ${json.s} is ${price}, we need to fix it!`)
       const currentPrice = await this.getSymbolPriceTicker(json.s)
       json.p = currentPrice
       this.messageHandler(json)
@@ -80,7 +81,8 @@ class Binance {
     })
   }
 
-  async getSymbolPriceTicker (symbol) {
+  async getSymbolPriceTicker(symbol) {
+    console.log(`Fetching price for ${symbol}`)
     return new Promise((resolve, reject) => {
       this.api.get('/api/v3/ticker/price', querystring.stringify({
         symbol: symbol
