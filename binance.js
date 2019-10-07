@@ -82,7 +82,7 @@ class Binance {
 
   async getSymbolPriceTicker (symbol) {
     return new Promise((resolve, reject) => {
-      this.api.post('/api/v3/ticker/price', querystring.stringify({
+      this.api.get('/api/v3/ticker/price', querystring.stringify({
         symbol: symbol
       }))
       .then(response => resolve(response.data.price))
