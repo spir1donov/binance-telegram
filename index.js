@@ -14,8 +14,7 @@ console.log(`
 const telegram = new Telegram(config.telegramToken, config.botUrl)
 const binance = new Binance(config.binanceKey)
 
-function handleBinanceMessage(msg) {
-  const message = JSON.parse(msg)
+function handleBinanceMessage(message) {
   const event = message.e
   let text
 
