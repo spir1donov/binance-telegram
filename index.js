@@ -58,6 +58,26 @@ app.get('/test', async (req, res) => {
   res.send(text)
 })
 
+app.post('/dummy', async (req, res) => {
+  let text
+  let message = JSON.parse(req.body)
+  message.p = await binance.getSymbolPriceTicker(message.s)
+  text = `Dummy Order: TEST001 for ${message.s}
+    Side: ${message.S}, Type: ${message.o}
+    Price: ${message.p}, Quantity: ${message.q}
+    Current order status: ${message.X}`
+
+  console.log('Sending order update', text)
+  // try {
+  //   const response = await telegram.sendMessage(config.telegramUser, text)
+  //   text = `Message sent. API Response: ${JSON.stringify(response, null, 2)}`
+  // } catch (e) {
+  //   text = `Error occured: ${JSON.stringify(e, null, 2)}`
+  // }
+  console.log('POST /dummy result', text)
+  res.send(text)
+})
+
 binance.setMessageHandler(handleBinanceMessage)
 
 app.listen(port, () => console.log(`Bot listening on port ${port}!`))
