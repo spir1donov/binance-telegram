@@ -65,8 +65,7 @@ class Binance {
     const price = parseFloat(json.p)
     if (price === 0) {
       console.log(`Symbol ${json.s} is ${price}, we need to fix it!`)
-      const currentPrice = await this.getSymbolPriceTicker(json.s)
-      json.p = currentPrice
+      json.p = await this.getSymbolPriceTicker(json.s)
       this.messageHandler(json)
     } else {
       this.messageHandler(json)
