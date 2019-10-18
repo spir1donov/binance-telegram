@@ -68,12 +68,12 @@ app.post('/dummy', async (req, res) => {
     Current order status: ${message.X}`
 
   console.log('Sending order update', text)
-  // try {
-  //   const response = await telegram.sendMessage(config.telegramUser, text)
-  //   text = `Message sent. API Response: ${JSON.stringify(response, null, 2)}`
-  // } catch (e) {
-  //   text = `Error occured: ${JSON.stringify(e, null, 2)}`
-  // }
+  try {
+    const response = await telegram.sendMessage(config.telegramUser, text)
+    text = `Message sent. API Response: ${JSON.stringify(response, null, 2)}`
+  } catch (e) {
+    text = `Error occured: ${JSON.stringify(e, null, 2)}`
+  }
   console.log('POST /dummy result', text)
   res.send(text)
 })
