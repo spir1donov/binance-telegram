@@ -45,6 +45,7 @@ app.get('/', (req, res) => res.send(
 ))
 
 app.get('/test', async (req, res) => {
+  let text
   try {
     const response = await telegram.sendMessage(config.telegramUser,
       req.query.test
