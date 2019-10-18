@@ -1,7 +1,7 @@
 {
   "name": "binance-telegram",
   "version": "1.0.0",
-  "description": "",
+  "description": "OrdersUpdatesBot for Binance and Telegram",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
