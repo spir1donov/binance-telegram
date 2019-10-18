@@ -81,16 +81,26 @@ class Binance {
   }
 
   async getSymbolPriceTicker(symbol) {
+    const url = '/api/v3/ticker/price'
     console.log(`Fetching price for ${symbol}`)
     return new Promise((resolve, reject) => {
-      this.api.get('/api/v3/ticker/price')
+      this.api.get(url)
       .then(response => {
-        const ticker = JSON.parse(response.data)
-        console.log('ticker', ticker)
-        const price = parseFloat(ticker.find(s => s.symbol === symbol)['price'])
-        resolve(price)
+        console.log(url, response.data)
+        try {
+          const ticker = JSON.parse(response.data)
+          console.log(url, ticker)
+          const price = parseFloat(ticker.find(s => s.symbol === symbol)['price'])
+          resolve(price)
+        } catch (e) {
+          console.log(url, e)
+          reject(e)
+        }
       })
-      .catch(reason => reject(reason))
+      .catch(reason => {
+        console.log(url, reason)
+        reject(reason)
+      })
     })
   }
 
