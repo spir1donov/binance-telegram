@@ -60,7 +60,7 @@ app.get('/test', async (req, res) => {
 
 app.post('/dummy', async (req, res) => {
   let text
-  let message = req.body
+  let message = JSON.parse(`{"e":"executionReport","E":1571220675490,"s":"BTCUSDT","c":"5dM11w33W7Kaob6hosSX0K","S":"SELL","o":"MARKET","f":"GTC","q":"0.00129900","p":"0.00000000","P":"0.00000000","F":"0.00000000","g":-1,"C":"null","x":"TRADE","X":"FILLED","r":"NONE","i":710328223,"l":"0.00129900","z":"0.00129900","L":"8154.43000000","n":"0.01059260","N":"USDT","T":1571220675487,"t":190630354,"I":1601694188,"w":false,"m":false,"M":true,"O":1571220675487,"Z":"10.59260457","Y":"10.59260457"}`)
   message.p = await binance.getSymbolPriceTicker(message.s)
   text = `Dummy Order: TEST001 for ${message.s}
     Side: ${message.S}, Type: ${message.o}
