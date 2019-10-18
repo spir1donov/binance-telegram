@@ -86,16 +86,18 @@ class Binance {
     return new Promise((resolve, reject) => {
       this.api.get(url)
       .then(response => {
-        console.log(url, response.data)
-        try {
-          const ticker = JSON.parse(response.data)
-          console.log(url, ticker)
-          const price = parseFloat(ticker.find(s => s.symbol === symbol)['price'])
-          resolve(price)
-        } catch (e) {
-          console.log(url, e)
-          reject(e)
-        }
+        console.log(url, 'response.data', response.data)
+        const price = parseFloat(response.data.find(s => s.symbol === symbol)['price'])
+        resolve(price)
+        // try {
+        //   const ticker = JSON.parse(response.data)
+        //   console.log(url, 'parsed', ticker)
+        //   const price = parseFloat(ticker.find(s => s.symbol === symbol)['price'])
+        //   resolve(price)
+        // } catch (e) {
+        //   console.log(url, e)
+        //   reject(e)
+        // }
       })
       .catch(reason => {
         console.log(url, reason)
