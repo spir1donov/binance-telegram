@@ -86,6 +86,7 @@ class Binance {
       this.api.get('/api/v3/ticker/price')
       .then(response => {
         const ticker = JSON.parse(response.data)
+        console.log('ticker', ticker)
         const price = parseFloat(ticker.find(s => s.symbol === symbol)['price'])
         resolve(price)
       })
